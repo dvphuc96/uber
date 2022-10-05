@@ -1,0 +1,70 @@
+var arrUBer = [];
+var btnTinhTien = document.querySelector("#btnTinhTien");
+btnTinhTien.onclick = function () {
+  var uBer = new UBer();
+  uBer.loaiXe = document.querySelector("input[type=radio]:checked")?.value;
+  uBer.soKM = Number(document.querySelector("#soKM").value);
+  uBer.thoiGianCho = Number(document.querySelector("#thoiGianCho").value);
+
+  if (!uBer.loaiXe) alert("Vui lòng chọn loại xe");
+  if (uBer.soKM === 0) alert("Vui lòng nhập số KM");
+  if (uBer.thoiGianCho === 0) alert("Vui lòng nhập thời gian chờ");
+
+  switch (uBer.loaiXe) {
+    case "uberX":
+      uBer.dongiaThoiGianCho = 2000;
+      uBer.soKM === 1
+        ? (uBer.dongiaKM = 8000)
+        : uBer.soKM > 1 && uBer.soKM < 21
+        ? (uBer.dongiaKM = 12000)
+        : (uBer.dongiaKM = 10000);
+      break;
+    case "uberSUV":
+      uBer.dongiaThoiGianCho = 3000;
+      uBer.soKM === 1
+        ? (uBer.dongiaKM = 9000)
+        : uBer.soKM > 1 && uBer.soKM < 21
+        ? (uBer.dongiaKM = 14000)
+        : (uBer.dongiaKM = 12000);
+      break;
+    case "uberBlack":
+      uBer.dongiaThoiGianCho = 4000;
+      uBer.soKM === 1
+        ? (uBer.dongiaKM = 10000)
+        : uBer.soKM > 1 && uBer.soKM < 21
+        ? (uBer.dongiaKM = 16000)
+        : (uBer.dongiaKM = 14000);
+
+      break;
+  }
+  arrUBer.push(uBer);
+  renderHoaDon(arrUBer);
+  document.querySelector("#divThanhTien").style.display = "block";
+  document.querySelector("#xuatTien").innerHTML = uBer.tinhCuocUBer();
+};
+
+function renderHoaDon(listUBer) {
+  var contentHTML = "";
+  for (var index = 0; index < listUBer.length; index++) {
+    var uber = listUBer[index];
+    contentHTML += `
+    <tr>
+      <td>${uber.loaiXe}</td>
+      <td>${uber.soKM} km</td>
+      <td>${uber.dongiaKM} vnd</td>
+      <td>${uber.thoiGianCho} phút</td>
+      <td>${uber.dongiaThoiGianCho} vnd</td>
+      <td>${uber.tinhCuocUBer()} vnd</td>
+    </tr>
+    `;
+    document.querySelector("#tblHoaDon").innerHTML = contentHTML;
+  }
+}
+function openModal() {
+  document.querySelector("#hoaDonModal").style.display = "block";
+  document.querySelector("body").classList.add("overlay");
+}
+function closeModal() {
+  document.querySelector("#hoaDonModal").style.display = "none";
+  document.querySelector("body").classList.remove("overlay");
+}
