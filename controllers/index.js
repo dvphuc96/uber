@@ -12,7 +12,7 @@ btnTinhTien.onclick = function () {
 
   switch (uBer.loaiXe) {
     case "uberX":
-      uBer.dongiaThoiGianCho = 2000;
+      uBer.donGiaThoiGianCho = 2000;
       uBer.soKM === 1
         ? (uBer.dongiaKM = 8000)
         : uBer.soKM > 1 && uBer.soKM < 21
@@ -20,7 +20,7 @@ btnTinhTien.onclick = function () {
         : (uBer.dongiaKM = 10000);
       break;
     case "uberSUV":
-      uBer.dongiaThoiGianCho = 3000;
+      uBer.donGiaThoiGianCho = 3000;
       uBer.soKM === 1
         ? (uBer.dongiaKM = 9000)
         : uBer.soKM > 1 && uBer.soKM < 21
@@ -28,7 +28,7 @@ btnTinhTien.onclick = function () {
         : (uBer.dongiaKM = 12000);
       break;
     case "uberBlack":
-      uBer.dongiaThoiGianCho = 4000;
+      uBer.donGiaThoiGianCho = 4000;
       uBer.soKM === 1
         ? (uBer.dongiaKM = 10000)
         : uBer.soKM > 1 && uBer.soKM < 21
@@ -53,7 +53,7 @@ function renderHoaDon(listUBer) {
       <td>${uber.soKM} km</td>
       <td>${uber.dongiaKM} vnd</td>
       <td>${uber.thoiGianCho} phút</td>
-      <td>${uber.dongiaThoiGianCho} vnd</td>
+      <td>${uber.donGiaThoiGianCho} vnd</td>
       <td>${uber.tinhCuocUBer()} vnd</td>
     </tr>
     `;
@@ -62,9 +62,9 @@ function renderHoaDon(listUBer) {
 }
 function openModal() {
   document.querySelector("#hoaDonModal").style.display = "block";
-  document.querySelector("body").classList.add("overlay");
+  document.querySelector("body").style.overflow = "hidden";
 }
 function closeModal() {
   document.querySelector("#hoaDonModal").style.display = "none";
-  document.querySelector("body").classList.remove("overlay");
+  document.querySelector("body").style.overflow = "auto";
 }
