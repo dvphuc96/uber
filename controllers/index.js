@@ -3,44 +3,47 @@ var btnTinhTien = document.querySelector("#btnTinhTien");
 btnTinhTien.onclick = function () {
   var uBer = new UBer();
   uBer.loaiXe = document.querySelector("input[type=radio]:checked")?.value;
-  uBer.soKM = Number(document.querySelector("#soKM").value);
-  uBer.thoiGianCho = Number(document.querySelector("#thoiGianCho").value);
+  uBer.soKM = document.querySelector("#soKM").value;
+  uBer.thoiGianCho = document.querySelector("#thoiGianCho").value;
 
-  if (!uBer.loaiXe) alert("Vui lòng chọn loại xe");
-  if (uBer.soKM === 0) alert("Vui lòng nhập số KM");
-  if (uBer.thoiGianCho === 0) alert("Vui lòng nhập thời gian chờ");
+  if (!uBer.loaiXe || uBer.soKM === "" || uBer.thoiGianCho === "") {
+    alert(
+      "Vui lòng điền đầy đủ thông tin trong form dưới đây để thực hiện tính toán"
+    );
+    return;
+  } else {
+    switch (uBer.loaiXe) {
+      case "uberX":
+        uBer.donGiaThoiGianCho = 2000;
+        Number(uBer.soKM) === 1
+          ? (uBer.donGiaKM = 8000)
+          : Number(uBer.soKM) > 1 && Number(uBer.soKM) < 21
+          ? (uBer.donGiaKM = 12000)
+          : (uBer.donGiaKM = 10000);
+        break;
+      case "uberSUV":
+        uBer.donGiaThoiGianCho = 3000;
+        Number(uBer.soKM) === 1
+          ? (uBer.donGiaKM = 9000)
+          : Number(uBer.soKM) > 1 && Number(uBer.soKM) < 21
+          ? (uBer.donGiaKM = 14000)
+          : (uBer.donGiaKM = 12000);
+        break;
+      case "uberBlack":
+        uBer.donGiaThoiGianCho = 4000;
+        Number(uBer.soKM) === 1
+          ? (uBer.donGiaKM = 10000)
+          : Number(uBer.soKM) > 1 && Number(uBer.soKM) < 21
+          ? (uBer.donGiaKM = 16000)
+          : (uBer.donGiaKM = 14000);
 
-  switch (uBer.loaiXe) {
-    case "uberX":
-      uBer.donGiaThoiGianCho = 2000;
-      uBer.soKM === 1
-        ? (uBer.donGiaKM = 8000)
-        : uBer.soKM > 1 && uBer.soKM < 21
-        ? (uBer.donGiaKM = 12000)
-        : (uBer.donGiaKM = 10000);
-      break;
-    case "uberSUV":
-      uBer.donGiaThoiGianCho = 3000;
-      uBer.soKM === 1
-        ? (uBer.donGiaKM = 9000)
-        : uBer.soKM > 1 && uBer.soKM < 21
-        ? (uBer.donGiaKM = 14000)
-        : (uBer.donGiaKM = 12000);
-      break;
-    case "uberBlack":
-      uBer.donGiaThoiGianCho = 4000;
-      uBer.soKM === 1
-        ? (uBer.donGiaKM = 10000)
-        : uBer.soKM > 1 && uBer.soKM < 21
-        ? (uBer.donGiaKM = 16000)
-        : (uBer.donGiaKM = 14000);
-
-      break;
+        break;
+    }
+    arrUBer.push(uBer);
+    renderHoaDon(arrUBer);
+    document.querySelector("#divThanhTien").style.display = "block";
+    document.querySelector("#xuatTien").innerHTML = uBer.tinhCuocUBer();
   }
-  arrUBer.push(uBer);
-  renderHoaDon(arrUBer);
-  document.querySelector("#divThanhTien").style.display = "block";
-  document.querySelector("#xuatTien").innerHTML = uBer.tinhCuocUBer();
 };
 
 function renderHoaDon(listUBer) {
