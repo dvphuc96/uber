@@ -14,26 +14,26 @@ btnTinhTien.onclick = function () {
     case "uberX":
       uBer.donGiaThoiGianCho = 2000;
       uBer.soKM === 1
-        ? (uBer.dongiaKM = 8000)
+        ? (uBer.donGiaKM = 8000)
         : uBer.soKM > 1 && uBer.soKM < 21
-        ? (uBer.dongiaKM = 12000)
-        : (uBer.dongiaKM = 10000);
+        ? (uBer.donGiaKM = 12000)
+        : (uBer.donGiaKM = 10000);
       break;
     case "uberSUV":
       uBer.donGiaThoiGianCho = 3000;
       uBer.soKM === 1
-        ? (uBer.dongiaKM = 9000)
+        ? (uBer.donGiaKM = 9000)
         : uBer.soKM > 1 && uBer.soKM < 21
-        ? (uBer.dongiaKM = 14000)
-        : (uBer.dongiaKM = 12000);
+        ? (uBer.donGiaKM = 14000)
+        : (uBer.donGiaKM = 12000);
       break;
     case "uberBlack":
       uBer.donGiaThoiGianCho = 4000;
       uBer.soKM === 1
-        ? (uBer.dongiaKM = 10000)
+        ? (uBer.donGiaKM = 10000)
         : uBer.soKM > 1 && uBer.soKM < 21
-        ? (uBer.dongiaKM = 16000)
-        : (uBer.dongiaKM = 14000);
+        ? (uBer.donGiaKM = 16000)
+        : (uBer.donGiaKM = 14000);
 
       break;
   }
@@ -51,7 +51,7 @@ function renderHoaDon(listUBer) {
     <tr>
       <td>${uber.loaiXe}</td>
       <td>${uber.soKM} km</td>
-      <td>${uber.dongiaKM} vnd</td>
+      <td>${uber.donGiaKM} vnd</td>
       <td>${uber.thoiGianCho} phút</td>
       <td>${uber.donGiaThoiGianCho} vnd</td>
       <td>${uber.tinhCuocUBer()} vnd</td>
